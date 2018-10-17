@@ -4,3 +4,33 @@ Qu'est-ce qu'un SGBD?
 ** Answer
 Un système de gestion de bases de données (SGBD) permet de créer, manipuler des données, les conserver de manière durable, 
 tout en assurant leur intégrité c’est-à-dire leur cohérence, leur fiabilité, et leur pertinence.
+
+
+* Question :drill:
+Quels sont les processus d'une instance SGBD oracle et quels sont leurs roles?
+
+** Answer
+
+
+- User Process : processus créé et maintenu pour exécuter le code d’un programme applicatif (par exemple, SQLPlus). Il y a 1 user process par session utilisateur.
+- System Process :
+  - Server Process : assurent la communication entre la SGA et les User
+   Process. Chaque processus serveur dispose d’une zone mémoire non partagée. Ces zones sont regroupées dans la Program Global Area.
+  Il dispose en particulier d’une zone SQL privée.
+    - Si la session est connectée à un serveur dédié, alors les zones SQL propres à chaque processus serveur sont dans la PGA.
+    - Si la session est connectée à un serveur partagé alors les zones SQL propres à chaque processus serveur sont partagées dans la SGA.
+  - Background Process : les m ́ecanismes internes de gestion des données, des journaux...
+
+
+#+CAPTION: Processus
+#+ATTR_HTML: :align center
+#+NAME:   fig:processus
+[[./images/processus.png]]
+
+Sur la figure précédente, on y voit différents processus d'arrière plan: 
+- DBWn : écrit les blocs modifiés de la base dans les fichiers de données. Il y a plusieurs processus de ce type DBW0, DBW1,···
+- LGWR : écrit le contenu du buffer REDO LOG de la SGA dans le fichier REDO LOG lors d’un commit.
+- ARCn : recopie les fichiers REDO LOG pleins sur un fichier archive (optionnel). Il y a plusieurs processus de ce type.
+- CKPT : responsable des checkpoints, i.e. écriture sur disque des données et logs.
+- SMON : rétablit la cohérence du système après un incident, et libère les ressources utilisées par le système.
+- PMON : récupère les anomalies des processus utilisateurs (supprime les process en erreur, libère les ressources utilisées par ces process ...
