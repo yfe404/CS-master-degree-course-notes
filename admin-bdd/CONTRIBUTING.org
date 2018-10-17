@@ -1,0 +1,5 @@
+* Comment contribuer ? 
+
+Ajouter vos question/réponses en respectant le format actuel (cf readme.org).
+
+
