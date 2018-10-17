@@ -1,0 +1,6 @@
+* Question :drill:
+Qu'est-ce qu'un SGBD?
+
+** Answer
+Un système de gestion de bases de données (SGBD) permet de créer, manipuler des données, les conserver de manière durable, 
+tout en assurant leur intégrité c’est-à-dire leur cohérence, leur fiabilité, et leur pertinence.
