@@ -3,3 +3,4 @@
 Ajouter vos question/réponses en respectant le format actuel (cf readme.org).
 
 
+Pour des idées de questions/réponses, vous pouvez vous inspirer des examens de années précédentes (disponibles sur Moodle).
