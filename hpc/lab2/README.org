@@ -1,0 +1,347 @@
+* High Performance Computing - Random number statuses & Parallel Stochastic streams
+
+#+BEGIN_QUOTE
+Generation of parallel random streams 
+Practice with a scientific library used for HPC in High Energy Physics.
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+Computer Science skills required: Unix / C / C++ & and a little of “sysadmin”
+#+END_QUOTE
+
+
+** Basics: Generation of pseudorandom numbers with a high quality generator
+
+#+BEGIN_SRC sh
+gcc files/mt19937/mt19937ar.c -o files/mt19937/mt.exe
+#+END_SRC
+
+
+#+BEGIN_SRC sh
+files/mt19937/mt.exe | tail
+#+end_SRC
+
+#+RESULTS:
+|  0.8505528 | 0.12749961 | 0.79452122 | 0.89449784 |  0.1456783 |
+|  0.4571683 | 0.74822309 | 0.28200437 | 0.42546044 | 0.17464886 |
+| 0.68308746 | 0.65496587 | 0.52935411 | 0.12736159 | 0.61523955 |
+| 0.81590528 | 0.63107864 | 0.39786553 | 0.20102294 | 0.53292914 |
+|  0.7548559 | 0.59847044 | 0.32861691 | 0.12125866 | 0.58917183 |
+| 0.07638293 |  0.8684538 | 0.29192617 | 0.03989733 |  0.5218046 |
+| 0.32503407 | 0.64071852 | 0.69516575 | 0.74254998 | 0.54587026 |
+| 0.48713246 | 0.32920155 | 0.08719954 | 0.63497059 | 0.54328459 |
+| 0.64178757 | 0.45583809 | 0.70694291 |  0.8521276 | 0.86074305 |
+| 0.33163422 | 0.85739792 | 0.59908488 | 0.74566046 | 0.72157152 |
+
+
+#+BEGIN_SRC sh
+files/mt19937/mt.exe > files/mt19937/myoutput.txt
+diff files/mt19937/myoutput.txt files/mt19937/mt19937ar.out | grep ".*" || echo "No difference"
+#+END_SRC
+
+#+RESULTS:
+: No difference
+
+
+
+#+BEGIN_SRC c
+int main(void)
+{
+    int i;
+    unsigned long init[4]={0x123, 0x234, 0x345, 0x456}, length=4;
+    init_by_array(init, length);
+
+    for (i=0; i<1000000000; i++) {
+      genrand_int32();
+    }
+
+    return 0;
+}
+#+END_SRC
+
+#+BEGIN_SRC sh :results pp
+gcc files/mt19937/mtbillion.c -o files/mt19937/mtb.exe
+gcc files/mt19937/mtbillion.c -o files/mt19937/mtb2.exe -O2
+gcc files/mt19937/mtbillion.c -o files/mt19937/mtb3.exe -O3
+
+echo "Time required to generate 1 billion int32 (no optimization) : "
+{ time files/mt19937/mtb.exe; }   2>&1
+echo "=============================="
+echo "Time required to generate 1 billion int32 (O2 optimization) : "
+{ time files/mt19937/mtb2.exe; } 2>&1
+echo "=============================="
+echo "Time required to generate 1 billion int32 (O3 optimization) : "
+{ time files/mt19937/mtb3.exe; } 2>&1
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Time required to generate 1 billion int32 (no optimization) : 
+
+real	0m7.969s
+user	0m7.941s
+sys	0m0.011s
+==============================
+Time required to generate 1 billion int32 (O2 optimization) : 
+
+real	0m3.626s
+user	0m3.611s
+sys	0m0.006s
+==============================
+Time required to generate 1 billion int32 (O3 optimization) : 
+
+real	0m3.601s
+user	0m3.587s
+sys	0m0.006s
+#+end_example
+
+
+** Use of a scientific library in C++ for stochastic simulation (CLHEP)
+
+#+BEGIN_SRC sh 
+time make
+#+END_SRC
+
+
+#+RESULTS:
+#+begin_example
+real	0m23.528s
+user	0m20.000s
+sys	0m2.863s
+#+end_example
+
+
+
+#+BEGIN_SRC sh 
+time make -j 32
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+real	0m7.658s
+user	0m35.009s
+sys	0m3.765sp
+#+end_example
+
+
+#+BEGIN_SRC sh
+g++ testRand.cpp -I./include -L./lib ./lib/libCLHEP-Random-2.1.0.0.a  -o myExe
+#+END_SRC
+
+
+
+#+BEGIN_SRC sh
+./testRandom  
+r=0.286072
+
+
+---------------------------- Random shooting test -----------------------------
+                             --------------------                              
+ >>> Random Engines available <<<
+
+   > HepJamesRandom (default)
+   > Rand
+   > DRand48
+   > Ranlux
+   > Ranlux64
+   > Ranecu
+   > Hurd160
+   > Hurd288
+   > MTwist
+   > Ranshi
+   > DualRand
+   > TripleRand
+
+                   -----  Press <ENTER> to continue  -----
+
+-------------------------  Test on HepJamesRandom  ----------------------------
+
+ Flat ]0,1[          : 0.366332
+ Flat ]0,5[          : 4.71494
+ Flat ]-5,3[         : -2.76815
+ Exp (m=1)           : 1.69603
+ Exp (m=3)           : 5.03437
+ Gauss (m=1)         : -0.341048
+ Gauss (m=3,v=1)     : 1.31813
+ Wigner(1,0.2)       : 1.01662
+ Wigner(1,0.2,1)     : 0.893918
+ Wigner2(1,0.2)      : 1.03873
+ Wigner2(1,0.2,1)    : 1.08296
+ IntFlat [0,99[      : 10
+ IntFlat [-99,37[    : -29
+ Poisson (m=3.0)     : 6
+ Binomial(n=1,p=0.5) : 0
+ Binomial(n=-5,p=0.3): -1
+ ChiSqr (a=1)        : 0.152852
+ ChiSqr (a=-5)       : -1
+ Gamma (k=1,l=1)     : 0.688196
+ Gamma (k=3,l=0.5)   : 4.04588
+ StudT (a=1)         : -4.46099
+ StudT (a=2.5)       : -0.211361
+
+ Shooting an array of 5 flat numbers ...
+
+ 0.59692 0.649783 0.0815703 0.588186 0.688171
+
+#+END_SRC
+
+
+
+#+BEGIN_SRC C
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <limits.h>
+#include <unistd.h>
+#include "CLHEP/Random/MTwistEngine.h"
+using namespace std;
+int main () {
+   double       sum;
+   unsigned int nbr;
+   unsigned int nb_status = 10;
+// Creation of a random stream using MT
+   CLHEP::MTwistEngine * rs = new CLHEP::MTwistEngine();
+   
+
+   for(int i = 0; i < nb_status; ++i) {
+     cout << "Status #" << i << endl;
+     std::ostringstream stream;
+     stream << "MT-Status";
+     stream << i;
+     std::string filename = stream.str();
+
+     rs->saveStatus(filename.c_str());
+     for(int j = 0; j < 10; ++j) {
+       double nb = rs->flat();
+       cout << nb << endl;
+ 
+     }
+ 
+   }
+  
+delete rs;
+ 
+return 0; }
+#+END_SRC
+
+
+#+BEGIN_SRC C
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <limits.h>
+#include <unistd.h>
+#include "CLHEP/Random/MTwistEngine.h"
+using namespace std;
+int main () {
+   double       sum;
+   unsigned int nbr;
+   unsigned int nb_status = 10;
+// Creation of a random stream using MT
+   CLHEP::MTwistEngine * rs = new CLHEP::MTwistEngine();
+   
+
+   for(int i = 0; i < nb_status; ++i) {
+     cout << "Status #" << i << endl;
+     std::ostringstream stream;
+     stream << "MT-Status";
+     stream << i;
+     std::string filename = stream.str();
+
+     rs->restoreStatus(filename.c_str());
+     for(int j = 0; j < 10; ++j) {
+       double nb = rs->flat();
+       cout << nb << endl;
+ 
+     }
+ 
+   }
+  
+delete rs;
+ 
+return 0; }
+#+END_SRC
+
+
+
+#+BEGIN_SRC C
+/* ---------------------------------------------------------------------- */
+/* Xmtc.c   Calcul de PI avec ma methode de Monte Carlo (Simul aleatoire) */
+/*                                                                        */
+/* Cette methode tres puissante n'est pas efficace pour le calcul de PI   */
+/* reste interesant de voir que l'on peut approcher PI avec des nombres   */
+/* aleatoires.                                                            */
+/* ---------------------------------------------------------------------- */
+
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <limits.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <math.h>
+
+#include "CLHEP/Random/MTwistEngine.h"
+using namespace std;
+     
+
+
+
+void afficheGraphisme();
+
+
+
+int main(int argc, char *argv[])
+{
+                         
+  afficheGraphisme();
+  return 0;
+}
+ 
+/* ---------------------------------------------------------------------- */
+/* afficheGraphisme         Test de primitives graphiques                 */
+/* ---------------------------------------------------------------------- */
+
+void afficheGraphisme()
+{                 
+   #define      MAX      1000000
+   #define      MAXXF    599.
+   #define      MAXYF    599.
+                 
+   static int   numcur   = 0;
+   long         i, cumul = 0; 
+   double       x,y,pi;              
+   int          px,py;
+
+   CLHEP::MTwistEngine * rs = new CLHEP::MTwistEngine();
+   srand(1);
+ 
+   for( i = 0; i < MAX ; i++)
+   {
+     
+     x =  rs->flat();
+     y =  rs->flat();
+     
+     if (((x-1)*(x-1) + (y-1)*(y-1)) <= 1) cumul++;
+   }
+   
+   pi = ((double) cumul * 4. / MAX);
+   printf("%d points, Approx de PI = %f, Approx Err : %f\n",
+          MAX, pi, 3.14159 - pi); 
+
+   delete rs;
+   exit(1);
+}
+
+/* ---------------------------------------------------------------------- */
+#+END_SRC
+
+
+
+#+BEGIN_SRC sh
+for res in $(ls *txt) ;do cat $res ;done | python -c "import sys; values = [ float(x.strip().split('=')[-1].split(',')[0].strip()) for x in sys.stdin.readlines()]; print(sum(values) / len(values))"
+#+END_SRC
+
+
