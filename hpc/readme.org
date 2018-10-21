@@ -39,6 +39,59 @@ What is the Top 500?
 ** Answer
 A benchmark and ranking for the world's fastest super computers. Since 1993 a list of computers ranked by their performance on the Linpack Bench.
 
+* Question :drill:
+In the top 500, how do supercomuters are evaluated?
+
+** Answer
+We use the Rmax and Rpeak on the LINPACK Benchmark.
+- The Rpeak score describes its theoritical peak performance.
+- The Rmax score describes its maximal achieved performance.
+
+Both of these measures are in TFlops/s 
+
+
+* Question :drill:
+What is the first supercomputer?
+
+** Answer
+The first machine referred as a supercomputer is the IBM Naval Ordonance Research Calculator.
+It was used at Columbia University from 1954 to 1963 to calculate missile trajectories.
+
+about 15000 operations per seconds.
+
+
+* Question :drill:
+What are the differences between scalar, vector, superscalar?
+
+** Answer
+ 
+- The simplest processors are scalar. Each instruction typically manipulates one or two data items at a time.
+- Each instruction executed by a vector processor operates simultaneously on many data items.
+- A superscalar processor is sort of a mixture of both. Each instruction processes one data item, but there are multiple redundant 
+ functional units within each CPU thus multiple insctructions can be processing separate data items concurrently.
+
+
+* Question :drill:
+What is the Flynn classification?
+
+** Answer
+Flynn proposed a classification of computer systems based on a number of instruction and data streams that can be processed simultaneously.
+
+- SISD (Single Instruction and Single Data): conventional old computes
+- SIMD (Single Instruction Multiple Data): Data parallel, vector computing machine
+- MISD (Multiple Instruction Single Data): Systolic arrays - More of an intellectual exercice than a practical config. Not available commercially.
+- MIMD (Multiple Instruction Multiple Data): General purpose machines
+
+* Question :drill:
+What is the limitation of SSID?
+
+** Answer
+The speed is limited by the rate at which computers can transfer information internally.
+
+
+
+
+
 
 
 
