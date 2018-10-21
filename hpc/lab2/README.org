@@ -379,3 +379,56 @@ print ("Confidence Interval 90%: {}".format(confidence_interval(.90, N, mean, st
 print ("Confidence Interval 95%: {}".format(confidence_interval(.95, N, mean, sterr)))
 print ("Confidence Interval 99%: {}".format(confidence_interval(.99, N, mean, sterr)))
 #+END_SRC
+
+
+
+#+BEGIN_SRC python
+from threading import Thread
+import subprocess
+
+from math import sqrt
+from numpy import average, std
+from scipy.stats import t
+
+PI_APPROXIMATIONS = list()
+
+def confidence_interval(percentage, N, point_estimate, sterr):
+    assert percentage < 1.0
+    t_bounds = t.interval(percentage, N-1)
+    ci = (point_estimate + critival * sterr for critival in t_bounds)
+    return tuple(ci)
+
+def task(*args, **kwargs):
+    name = str(kwargs["name"])
+    res = subprocess.run(["../pi", "MT-Status" + name], stdout=subprocess.PIPE)
+    res = float(res.stdout)
+    PI_APPROXIMATIONS.append(res)
+
+
+if __name__ == '__main__':
+    threads = list()
+
+    for i in range(10):
+        th = Thread(target=task, kwargs={"name": i})
+        th.start()
+        threads.append(th)
+
+
+        # Wait for all threads to complete                                                 
+        for th in threads:
+            th.join()
+
+        mean = average(PI_APPROXIMATIONS)
+        stddev = std(PI_APPROXIMATIONS, ddof=1)
+        sterr = stddev / sqrt(len(PI_APPROXIMATIONS))
+        N = len(PI_APPROXIMATIONS)
+
+        print ("Mean: {}".format(mean))
+        print ("Confidence Interval 90%: {}".format(confidence_interval(.90, N, mean, ster\
+r)))
+        print ("Confidence Interval 95%: {}".format(confidence_interval(.95, N, mean, ster\
+r)))
+        print ("Confidence Interval 99%: {}".format(confidence_interval(.99, N, mean, ster\
+r)))
+#+END_SRC
+
