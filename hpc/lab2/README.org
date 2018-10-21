@@ -345,3 +345,37 @@ for res in $(ls *txt) ;do cat $res ;done | python -c "import sys; values = [ flo
 #+END_SRC
 
 
+#+BEGIN_SRC python
+from math import sqrt
+from numpy import average, std
+from scipy.stats import t
+
+
+def confidence_interval(percentage, N, point_estimate, sterr):
+    assert percentage < 1.0
+    t_bounds = t.interval(percentage, N-1)
+    ci = (point_estimate + critival * sterr for critival in t_bounds)
+    return tuple(ci)
+
+
+data=[]
+
+with open("all.txt", "r") as f:
+    line = f.readline()
+
+    while line:
+        ## process line                                                                    
+        pi = float(line.split('=')[1].split(',')[0].strip())
+        data.append(pi)
+        line = f.readline()
+
+mean = average(data)
+stddev = std(data, ddof=1)
+sterr = stddev / sqrt(len(data))
+N = len(data)
+
+print ("Mean: {}".format(mean))
+print ("Confidence Interval 90%: {}".format(confidence_interval(.90, N, mean, sterr)))
+print ("Confidence Interval 95%: {}".format(confidence_interval(.95, N, mean, sterr)))
+print ("Confidence Interval 99%: {}".format(confidence_interval(.99, N, mean, sterr)))
+#+END_SRC
