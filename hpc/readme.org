@@ -1,0 +1,44 @@
+* Question :drill:
+Why Parallel Processing?
+
+** Answer
+- Computation requirements are ever increasing
+  - simulations
+  - internet
+  - finance
+  - mining
+  - etc.
+- Silicon based (sequential) architectures reaching their limits in processing capabilities (clock speed) as they are constrained by:
+  - the speed of light VS thermodynamics
+  - quantum computing
+
+
+* Question :drill:
+What does FLOPS mean?
+
+** Answer
+FLOPS: floating-point operations per second
+
+It's a measure of computer performance.
+
+
+* Question :drill:
+Give 4 applications of the supercomputer Earth Simulator 2?
+
+** Answer
+- Ocean - Atmosphere interactions
+- Deep current simulation in the Atlantic
+- Simulation of tuna moves around Japan
+- Simulation of Galaxies (model the growth of galaxies 300 million years after the Big Bang until now)
+
+
+
+* Question :drill:
+What is the Top 500?
+
+** Answer
+A benchmark and ranking for the world's fastest super computers. Since 1993 a list of computers ranked by their performance on the Linpack Bench.
+
+
+
+
