@@ -32,7 +32,7 @@ def create_weather_df():
     te = TransactionEncoder()
     te_ary = te.fit(data).transform(data)
     df = pd.DataFrame(te_ary, columns=te.columns_)
-    df.to_csv("./data/weather.nominal.csv")
+    df.to_csv("./data/weather.nominal.csv", index=False)
     
 
 
@@ -59,7 +59,7 @@ def create_supermarket_df():
     df_total = df['total'].str.get_dummies()
     df = pd.concat([df, df_total], axis=1)
     df = df.drop(['total'], axis=1)
-    df.to_csv("./data/supermarket.csv")
+    df.to_csv("./data/supermarket.csv", index=False)
     
 
 if __name__ == "__main__":
