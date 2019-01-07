@@ -1,4 +1,43 @@
 * High Performance Computing - Lab 3
 
+[[http://fc.isima.fr/~hill/HPC/Labs/HPC-Lab3-Docs/Lab%25203%2520-%2520Beware%2520of%2520floating%2520points%2520arithmetics.pdf][Link to the assignment]]
+
 ** Beware of floating point arithmetics 
+
+
+*** What I learned 
+
+in the following snippet: 
+
+#+BEGIN_SRC C
+int main() {
+  float a = 0.7;
+  float b = 0.5;
+  if (a < 0.7) {
+    if (b < 0.5) printf("2 conditions are right");
+    else printf("only 1 is right");
+  } else printf("0 conditions are right");
+}
+#+END_SRC
+
+Floats get promoted to doubles during comparison, and since floats are less precise than doubles, 0.7 as float 
+is not the same as 0.7 as double. 
+In this case, 0.7 as float becomes inferior to 0.7 as double when it gets promoted.
+And as 0.5 is a power of 2, it is always represented exactly, so the test works as expected: 0.5 < 0.5 is false.
+If you want the naive expected behavior, change float to double or .7 and .5 to .7f and .5f and you will get the expected behavior. 
+
+5 things to keep in mind when working with floating point numbers (=float= and =double=):
+- Don't Test for Equality
+- Worry about Addition and Subtraction more than Multiplication and Division
+- Use Logarithms to Avoid Overflow and Underflow
+- Floating Point Numbers have Finite Ranges
+- Numeric Operations don't Always Return Numbers
+
+** Links
+- Reference for coding real numbers in a limited set of bits: [[https://www.wikiwand.com/fr/IEEE_754][IEEE 754]].
+- [[http://www.binaryconvert.com/][Online Binary-Decimal Converter (standard IEEE754)]]
+- [[https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html][What Every Computer Scientist Should Know About Floating-Point Arithmetic]]
+
+
+
 
