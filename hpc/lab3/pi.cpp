@@ -27,7 +27,7 @@ int main () {
 
 
    std::thread threads[nb_status];
-   // spawn 10 threads:
+   // spawn nb_status threads:
    for (int i=0; i<nb_status; ++i)
      threads[i] = std::thread(compute_pi,i);
 
