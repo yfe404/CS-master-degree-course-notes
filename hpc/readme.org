@@ -95,3 +95,44 @@ The speed is limited by the rate at which computers can transfer information int
 
 
 
+
+
+
+
+
+
+* Question :drill:
+Can science predict everything, calculate everything, demonstrate everything?
+
+** Answer
+
+No... Despite massive media communication on the fact that Science will explain everything. Mathematicians and Physicists have discovered and demonstrated
+several *irreductible limits* to the universal knowledge.
+
+- Godel's incompleteness theorems are among the the first examples of fundamental limits of mathematics.
+- There are also cognitive and ontological limits (in connection with the study of being, its modalities and its properties). It is indeed impossible to calculate some 
+mathematical/physical objects and even to know if some exists. 
+- Chaotic systems, which can only be studied by simulation, pose a predictive limit, it is not possible to determine the state of the system beyond a limited future. 
+
+* Question :drill:
+What is emrgence?
+
+** Answer
+The emergence evokes the idea of an unveiling, an apparition that takes shape, but was somewhat already there, under the appearance still elusive or completely hidden.
+
+This is the case or emerging land (hidden below water) or the case of an iceberg. 
+
+
+* Question :drill:
+What are the limits of Science in explaining everything ?
+
+** Answer
+These limits fall into 4 categories: 
+
+1. Predictive limits: show the impossibility of predicting certain phenomenona with an arbitrary precision over an indefinite time scale.
+2. Cognitive limits: related to the existence of domains that remain beyond the reach of knowledge. Such limits appear in mathematics in the study of perfectly defined bu incalculable numbers and of numbers that can oonly be determined witha finite number of decimals (PI, PHI etc.)
+3. The constructive limit: that relate to the impossibility of constructing a scientific discourse which escapes all doubt and which relies on a sure fondation. 
+4. The ontological limits: that eliminate some conceptual entities by showing their inconsistency or by locating them outsite the field of apprehension if the scientific discourse. This is the case in quantum physics with the privileged role of the observer, or in mathematics with the question of the existence or not of certain objects.
+
+
+
