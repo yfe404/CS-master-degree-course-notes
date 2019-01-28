@@ -1,1 +1,55 @@
-* CS-master-degree-course-notes
+* Graph Theory
+
+#+BEGIN_QUOTE
+Conférences: 
+- http://sigmod2019.org/
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+- Comment avoir des algorithmes polynomiaux sur les graphes ?
+- Peut-on exprimer les problèmes d'optimisation sous forme de graphes ?
+#+END_QUOTE
+
+On va s'intéresser aux problèmes que l'on pose sur les graphes. L'idée c'est de fixer une classe de graphes et étudier si les problèmes difficiles deviennent faciles.
+
+Souvent les problèmes de l'industrie peuvent être résolus en temps polynomial alors qu'ils sont exponentiels en théorie (dans le pire des cas).
+
+=> Le pire des cas ne se trouve pas toujours en pratique. En se restreignant à certaines classes de graphes, nous verrons que des algorithmes exponentiels 
+deviennent polynomiaux.
+
+#+BEGIN_QUOTE
+- Quels sont les problèmes qui deviennet polynomiaux et sur quelles classes ?
+- Une fois que l'on tombe sur du polynomial, peut-on encore faire mieux ?
+- Est-il facile de prouver qu'une instance de graphe appartient à une classe particulière ? 
+#+END_QUOTE
+
+Nous tenterons de répondre à ces interrogations.
+
+
+** Pré requis 
+
+Les notions suivantes sont à connaitre: 
+
+*** Graphes simples 
+A simple graph, also called a strict graph (Tutte 1998, p. 2), is an unweighted, undirected graph containing no graph loops or multiple edges (Gibbons 1985, p. 2; West 2000, p. 2; Bronshtein and Semendyayev 2004, p. 346). A simple graph may be either connected or disconnected. 
+Unless stated otherwise, the unqualified term "graph" usually refers to a simple graph.
+
+*** Voisinage 
+Dans un graphe non orienté 
+G=(V,E), le voisinage d'un sommet $v \in V$, souvent noté $N_{G(v)}$ (N pour neighbourhood) peut désigner plusieurs choses :
+
+- L'ensemble des sommets voisins : ${w:(v,w) \in E}$
+- Les sous-graphe de G induit par les sommets précédents, avec ou sans v selon les versions.
+
+*** Degré
+
+
+
+- Les classes P_n, C_n et K_n
+- Connectivité 
+- Isomorphisme 
+- Sous-graphe
+- Corde
+
+
+
