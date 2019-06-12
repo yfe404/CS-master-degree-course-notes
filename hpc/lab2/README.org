@@ -320,7 +320,6 @@ void afficheGraphisme()
  
    for( i = 0; i < MAX ; i++)
    {
-     
      x =  rs->flat();
      y =  rs->flat();
      

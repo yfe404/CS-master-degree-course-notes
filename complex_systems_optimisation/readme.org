@@ -1,1 +1,15 @@
 * CS-master-degree-course-notes
+
+
+** Branch and Bound 
+
+*** Search Strategies 
+
+**** Depth-first 
+- Prune when a node estimation is worse than the best found solution 
+**** Breadth-first
+
+**** Best-first
+- Select a node with the best estimation
+**** Least-discrepancy
+- Trust a greedy heuristic

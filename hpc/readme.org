@@ -97,7 +97,42 @@ The speed is limited by the rate at which computers can transfer information int
 
 
 
+* Question :drill:
+What are the 4 V's of Big Data?
 
+** Answer
+1. Volume: The scale of data
+2. Variety: Different forms of data
+3. Velocity: Analysis of streaming data
+4. Veracity: Uncertainty of data
+
+* Question :drill:
+What are the Parallel File Systems ?
+
+** Answer
+Distributed parallel file systems stripe data over multiple servers for high performance.
+
+Some of the distributed parallel file systems use Object Storage Device (OSD) for chunks of data together with centralized metadat servers. 
+The following are *non fault-tolerant file systems*
+
+- The *Fraunhofer Prallel File System* (FhGFS) is available for free of charge for Linux high availability features are on the roadmap
+- *Parallel Virtual File Systems* (PVFS, PVFS2, OrangeFS) are deveoped to store virtual system images, with a focus on non shared optimizations. Available for Linux under GPL.
+- *Starfish* is a POSIX compatible, N-way redondant file system available for Linux (Windows support avalable via Samba).
+- ...
+
+* Question :drill:
+What are the Fault Tolerant Parallel File Systems?
+
+** Answer
+Some Distributed file systems are parallel and fault tolerant, they strip and replicate data over multiple servers for high performamce and to maintain data integrity.
+
+Even if a server fails no data is lost. The file systems are used in both HPC and High Availability Clusters. 
+- *GPFS*: General Parallel File System, IBM 
+- *Lustre* originally developped by Cluster File Systems and currently supported by Intel, POSIX compliant, high performance filesystem, Lustre has high availability.
+- *Google File System*: Linux - focus on fault-tolerance, high throughput and scalability
+- *Hadoop*: Distributed File System: Apache Software Foundation, Cross-plateform Open Source GoogleFS clone. 
+
+ 
 
 
 
